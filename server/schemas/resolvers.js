@@ -13,6 +13,22 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
           }
-}}
+},
+Query:{
+user:async (parent, args, context) => {
+  if (context.user){
+    const userdata= user.findOne({
+      //put id here, where it's coming from
+      _id:context.user._id
+    }) 
+  return userdata
+  }
+
+  throw new Error("no user is logged in!")
+
+}
+}
+
+}
 
 module.exports = resolvers;
